@@ -27,7 +27,7 @@ function DiagnosisScreen(){
     
 
 // Load the model from the models folder
-  const loadModel = async () => {
+  /*const loadModel = async () => {
     //Loading model from models folder
     const modelJSON = require("../../model/model.json");
   
@@ -37,7 +37,7 @@ function DiagnosisScreen(){
       .catch(e => console.log(e));
     console.log("Model loaded!");
     setModel(model)
-    }
+    }*/
 
     // async function loadModel(url) {
     //     try {
@@ -58,11 +58,11 @@ function DiagnosisScreen(){
             model.predict()
         }
         
-        useEffect(()=>{
+       /* useEffect(()=>{
         tf.ready().then(()=>{
          loadModel().then(console.log("model loaded"))
         });
-        },[])
+        },[])*/
 
     return(
         <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

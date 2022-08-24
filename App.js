@@ -12,8 +12,6 @@ import useCachedResources from './src/hooks/useCachedResources'
 import MainStackNavigator from './src/navigation/stackNavigator';
 
 
-
-
 export default function App() {
  
   const [appIsReady, setAppIsReady] = useState(false);
