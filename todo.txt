@@ -1,0 +1,3 @@
+input validation
+searchbar state update
+authentication state

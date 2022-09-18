@@ -1,30 +1,57 @@
 import { useNavigation } from '@react-navigation/native';
-import {SafeAreaView, Text, View, Button, Image, ScrollView} from 'react-native';
+import {SafeAreaView, Text, View, Button, Image, ScrollView, StatusBar} from 'react-native';
+import colors from '../../constants/colors';
+import fireStoreDb from '../firebase';
+import {useState, useEffect} from 'react'
 
 
-function NewsDetailsScreen(){
-    const navigation = useNavigation()
+function NewsDetailsScreen({route, navigation}){
+    
     function handleGoBack(){
         navigation.goBack()
     }
+
+    const [data, setData] = useState();
+    const {newstitle} = route.params;
+    console.log(newstitle)
+
+    useEffect(()=>{
+
+        const getDb = async()=>{
+            signInUserWithEmailAndPassword("enochdaywalker@gmail.com", "password123");
+           
+            const q = query(collection(fireStoreDb, "news"), where("title", "==", JSON.stringify(newstitle)));
+
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, " => ", doc.data());
+            });
+            setData(querySnapshot);
+            
+
+        }
+       getDb();
+    }, [])
+
     return(
         
-        <SafeAreaView style={{flex: 1}}>
-            <ScrollView contentContainerStyle={{flex: 1}}>
-            <View style={{alignItems: 'center', flex: 1}}>
-                <Text style={{lineHeight: 24, fontSize: 28, padding: "3%", fontFamily: 'montserrat-medium'}}>Teaspoon of salt is healthy for everyday life</Text>
-                <Image source={require('../../assets/2.jpg')} style={{width: "99%", height: "40%"}} resizeMode="cover"/>
-                <Text style={{lineHeight: 20, fontSize: 16,  padding: "1%", fontFamily: 'montserrat-light'}}>Lorem ipsum dolor sit amet,</Text>                
-                <Text style={{lineHeight: 24, fontSize:20,  padding: "3%", fontFamily: 'montserrat-light', marginTop: "3%"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execonsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execonsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execonsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execonsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ma gna aliqua. Ut enim ad minim veniam, quis nostrud exeUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+            <SafeAreaView style={{flex: 1}}>
                 
-
-      
-                
-
-            </View>
-            </ScrollView>
+                <ScrollView contentContainerStyle={{alignContent: 'center', justifyContent: 'center', flexGrow: 1, alignItems: 'center', paddingHorizontal: '3%', }}   >
+                        <View style={{width: "100%", height: "100%", }}>
+                        <Text style={{lineHeight: 24, fontSize: 28, fontFamily: 'montserrat-medium', marginTop: '5%', paddingVertical: "2%"}}>{data.title}</Text>
+                        <Image source={require('../../assets/2.jpg')} style={{width: "99%", height: "20%"}} resizeMode="cover"/>
+                        <Text style={{lineHeight: 20, fontSize: 16,  padding: "1%", fontFamily: 'montserrat-light'}}>{data.fullText}</Text>                
+                        <Text style={{lineHeight: 24, fontSize:20,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}>{data.date}</Text>
+                        <Text style={{lineHeight: 24, fontSize:20,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}>{data.writer}</Text>
+                    
+                        </View>
+                </ScrollView>
+            </SafeAreaView>
             
-        </SafeAreaView>
+            
+        
         
         
     )

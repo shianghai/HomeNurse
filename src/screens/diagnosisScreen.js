@@ -12,7 +12,11 @@ import {bundleResourceIO} from "@tensorflow/tfjs-react-native";
 
 
 
-function DiagnosisScreen(){
+function DiagnosisScreen(navigation){
+
+    function handleDiagnose(){
+        navigation.navigate('diseaseDetails')
+    }
 
     const [model, setModel] = useState();
     
@@ -66,13 +70,13 @@ function DiagnosisScreen(){
 
     return(
         <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <View style={{height: "90%", width: "90%", backgroundColor: 'white', justifyContent: "center", alignItems: "center"}}>
-                <Text style={{marginBottom: "10%", fontSize: 18, color: "grey"}}>Enter sysmptons below to get diagnosis</Text>
+            <View style={{height: "90%", width: "98%", backgroundColor: 'white', justifyContent: "center", alignItems: "center"}}>
+                <Text style={{marginBottom: "10%", fontSize: 18, color: "grey"}}>Enter symptons</Text>
                 <InputField style={{marginBottom: "4%"}}/>
                 <InputField style={{marginBottom: "4%"}}/>
                 <InputField style={{marginBottom: "4%"}}/>
                 <InputField style={{marginBottom: "4%"}}/>
-                <FlatButton text="Diagnose" style={{marginTop: "5%"}}/>
+                <FlatButton text="Diagnose" style={{marginTop: "5%",}} onPress={()=>handleDiagnose}/>
             </View>
         </SafeAreaView>
     )

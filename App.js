@@ -9,7 +9,11 @@ import AppLoading from 'expo-app-loading';
 import {useFonts} from 'expo-font'
 import { createUserAccountWithEmailAndPassword } from './src/firebase';
 import useCachedResources from './src/hooks/useCachedResources'
-import MainStackNavigator from './src/navigation/stackNavigator';
+import MainDrawerNavigator from './src/navigation/drawerNavigator';
+import MainStackNavigator from './src/navigation/stackNavigation';
+import {store} from './src/redux/store'
+import {Provider} from 'react-redux'
+
 
 
 export default function App() {
@@ -57,9 +61,12 @@ export default function App() {
   }
   
     return (
-      <NavigationContainer onReady={onLayoutRootView}>
+      <Provider store={store}>
+          <NavigationContainer onReady={onLayoutRootView}>
           <MainStackNavigator/>
       </NavigationContainer>
+      </Provider>
+      
     )
   
 }
