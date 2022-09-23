@@ -29,7 +29,7 @@ import { useNavigation } from '@react-navigation/native';
           icon={(focused, color, size)=>{
            return <DisplayImage image='https://picsum.photos/id/237/200/105' size={50}/>
           }}
-          onPress={() => {}}
+          onPress={() => {navigation.navigate('Profile')}}
           labelStyle={{flex: 1, backgroundColor: 'red'}}
           style={{}}
           
@@ -38,7 +38,7 @@ import { useNavigation } from '@react-navigation/native';
           label={()=>{
             return <Text style={{marginLeft: '\-16%', fontSize: 18}}>Edit Profile</Text>
           }}
-          onPress={() => {navigation.navigate('Profile')}}
+          onPress={() => {navigation.navigate('EditProfile')}}
           icon={()=>{
             return <EvilIcons name='user' size={30} />
           }}

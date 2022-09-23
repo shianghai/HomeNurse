@@ -1,4 +1,4 @@
-import {View, SafeAreaView, Text} from 'react-native'
+import {View, SafeAreaView, Text, ImageBackground} from 'react-native'
 import FlatButton from '../components/flatButton'
 import InputField from '../components/input'
 import * as tf from '@tensorflow/tfjs'
@@ -70,14 +70,14 @@ function DiagnosisScreen(navigation){
 
     return(
         <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <View style={{height: "90%", width: "98%", backgroundColor: 'white', justifyContent: "center", alignItems: "center"}}>
-                <Text style={{marginBottom: "10%", fontSize: 18, color: "grey"}}>Enter symptons</Text>
-                <InputField style={{marginBottom: "4%"}}/>
-                <InputField style={{marginBottom: "4%"}}/>
-                <InputField style={{marginBottom: "4%"}}/>
-                <InputField style={{marginBottom: "4%"}}/>
-                <FlatButton text="Diagnose" style={{marginTop: "5%",}} onPress={()=>handleDiagnose}/>
-            </View>
+            <ImageBackground source={require('../../assets/diagnose.jpg')} style={{height: "100%", width: "100%", backgroundColor: 'white', justifyContent: "center", alignItems: "center", shadowOpacity: 0.4}} resizeMode="cover">
+                <Text style={{marginBottom: "10%", fontSize: 30, color: "grey",}}>HomeNurse</Text>
+                <InputField style={{marginBottom: "2%", width: '95%'}} />
+                <InputField style={{marginBottom: "2%", width: '95%'}}/>
+                <InputField style={{marginBottom: "2%", width: '95%'}}/>
+                <InputField style={{marginBottom: "2%", width: '95%'}}/>
+                <FlatButton text="Diagnose" style={{marginTop: "7%", width: '60%'}} onPress={()=>handleDiagnose}/>
+            </ImageBackground>
         </SafeAreaView>
     )
 }

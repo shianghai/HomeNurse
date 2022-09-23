@@ -1,14 +1,28 @@
-import { SafeAreaView, View, Text, ScrollView, FlatList, TouchableOpacity } from "react-native";
+import { SafeAreaView, View, Text, ScrollView, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 import fireStoreDb from "../firebase";
 import {useState, useEffect, useLayoutEffect} from 'react'
 import { collection, query, where, getDocs } from "firebase/firestore";
 import DisplayImage from "../components/displayImage";
 import { signInUserWithEmailAndPassword } from "../firebase";
+import colors from "../../constants/colors";
 
 
 
 function ProfessionalsScreen({route, navigation}){
     const [data, setData] = useState();
+    const [isLoading, setIsLoading] = useState(true)
+
+    useLayoutEffect(()=>{
+        navigation.setOptions({
+           headerStyle: {backgroundColor: colors.light.primary},
+           headerLeft: ()=>{
+            return (
+                    <DisplayImage image={"https://picsum.photos/200/300"} size={30}/>
+                )
+           }
+        })
+      }, [navigation])
+
 
     const handleChoose = (itemName, itemAvatar)=>{
        
@@ -17,6 +31,8 @@ function ProfessionalsScreen({route, navigation}){
             imgUrl: itemAvatar
         });
     }
+
+
     
 
     useEffect(()=>{
@@ -33,7 +49,10 @@ function ProfessionalsScreen({route, navigation}){
                 //console.log(doc.id, " => ", doc.data());
             });
             setData(newArr);
-            
+           setTimeout(()=>{
+            setIsLoading(false);
+
+           }, 3000)
         }
        getDb();
     }, [])
@@ -63,7 +82,9 @@ function ProfessionalsScreen({route, navigation}){
         
         )
     }
-
+    if(isLoading) {
+        return <ActivityIndicator animating={isLoading} style={{flex: 1, justifyContent: 'center'}} size="large" color={colors.light.secondary}/>
+    }
     return(
         <View style={{flex: 1, width: "100%", paddingHorizontal: "3%"}}>
             <FlatList 

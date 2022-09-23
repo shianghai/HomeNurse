@@ -89,7 +89,7 @@ function BottomNavigation(){
                                                    <Feather name='command' size={30} color={color}/>
                                     )
                                 },
-                                headerStyle: {backgroundColor: colors.light.primary}
+                                headerShown: false
                                })}/>
 
                             <BottomTabs.Screen name='Chat' 

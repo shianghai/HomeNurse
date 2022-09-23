@@ -15,15 +15,20 @@ export default function NewsCard({Data}){
     const imageHeigtht = sHeight/ 50 * 10
 
 
-    function handlePress(title){
-        console.log(title)
-        navigation.navigate('NewsDetails', {newstitle: JSON.stringify(title)})
+    function handlePress(title, writer, fullText, date){
+        
+        navigation.navigate('NewsDetails', {
+            title: title,
+            writer: writer,
+            fullText: fullText,
+            date: date,
+        })
     }
     const renderItem = ({item})=>{
        
        
         return(
-            <TouchableOpacity onPress={()=>{handlePress(item.title)}}>
+            <TouchableOpacity onPress={()=>{handlePress(item.title, item.writer, item.fullText, item.date)}}>
                 <View style={{ backgroundColor: "white", flexDirection: 'row', marginVertical: "2%"}} key={item.id}>
                    
                     

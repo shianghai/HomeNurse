@@ -13,6 +13,8 @@ import SignUpScreen from '../../screens/signupScreen';
 import DiseaseDetailsScreen from '../../screens/diseaseDetailsScreen';
 import ChatScreen from '../../screens/chatScreen';
 import { Text } from 'react-native';
+import NotificationSettingsScreen from '../../screens/notificationSettingsScreen';
+import LocationSettingsScreen from '../../screens/locationSettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,13 +27,16 @@ function MainStackNavigator(){
             <Stack.Screen name='DosageTracker' component={DosageTrackerScreen}/>
             <Stack.Screen name='Professionals' component={ProfessionalsScreen}/>
             <Stack.Screen name='Logout' component={LogOutScreen}/> 
-            <Stack.Screen name='Settings' component={SettingsScreen}/>
+            <Stack.Screen name='Settings' component={SettingsScreen} />
             <Stack.Screen name='LogIn' component={LoginScreen} options={{headerShown: false}}/>
-            <Stack.Screen name='NewsDetails' component={NewsDetailsScreen}/>
+            <Stack.Screen name='NewsDetails' component={NewsDetailsScreen} options={{headerShown: false}}/>
             <Stack.Screen name='SignUp' component={SignUpScreen} options={{headerShown: false}}/>
             <Stack.Screen name='Search' component={SearchScreen} options={{headerShown: false}}/>
             <Stack.Screen name='DiseaseDetails' component={DiseaseDetailsScreen} options={{headerShown: false}}/>
             <Stack.Screen name='ChatScreen' component={ChatScreen} />
+            <Stack.Screen name='NotificationsSettings' component={NotificationSettingsScreen} options={{headerShown: false}} />
+            <Stack.Screen name='LocationSettings' component={LocationSettingsScreen} options={{headerShown: false}} />
+           
 
 
         </Stack.Navigator>

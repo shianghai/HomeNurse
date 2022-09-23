@@ -27,8 +27,8 @@ const defaultInputProps = {
         borderInactive: 'grey',
         hasError: 'red',
         content: 'grey',
-        backgroundInactive: 'white',
-        backgroundActive: '#E1EBEA'
+        backgroundInactive: '#E1EBEA',
+        backgroundActive: 'white'
     }
 }
 
