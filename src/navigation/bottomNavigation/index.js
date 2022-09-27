@@ -10,6 +10,7 @@ import ProfilePicture from '../../components/displayImage'
 import colors from '../../../constants/colors'
 import DisplayImage from '../../components/displayImage'
 import ProfessionalsScreen from '../../screens/professionalsScreen'
+import SettingsScreen from '../../screens/settingsScreen'
 
 
 
@@ -70,7 +71,7 @@ function BottomNavigation(){
                                   },
                                 tabBarIcon: ({focused, color})=>{
                                     return(
-                                        focused ? <Feather name='home' size={30} color={color}/> 
+                                        focused ? <Feather name='home' size={35} color={color}/> 
                                                    :
                                                    <Feather name='home' size={30} color={color}/>
                                     )
@@ -78,27 +79,14 @@ function BottomNavigation(){
                                 headerStyle: {backgroundColor: colors.light.primary}
                                
                                })}/>
-            <BottomTabs.Screen name='Diagnosis' 
-                               component={DiagnosisScreen}
-                               options={({ })=>({
-                                
-                                tabBarIcon: ({focused, color})=>{
-                                    return(
-                                        focused ? <Feather name='command' size={30} color={color}/> 
-                                                   :
-                                                   <Feather name='command' size={30} color={color}/>
-                                    )
-                                },
-                                headerShown: false
-                               })}/>
-
+            
                             <BottomTabs.Screen name='Chat' 
                                 component={ProfessionalsScreen}
                                 options={({ })=>({
                                     
                                     tabBarIcon: ({focused, color})=>{
                                         return(
-                                            focused ? <Feather name='message-circle' size={30} color={color}/> 
+                                            focused ? <Feather name='message-circle' size={35} color={color}/> 
                                                        :
                                                        <Feather name='message-circle' size={30} color={color}/>
                                         )
@@ -113,7 +101,7 @@ function BottomNavigation(){
                                     
                                     tabBarIcon: ({focused, color})=>{
                                         return(
-                                            focused ? <Feather name='map-pin' size={30} color={color}/> 
+                                            focused ? <Feather name='map-pin' size={35} color={color}/> 
                                                        :
                                                        <Feather name='map-pin' size={30} color={color}/>
                                         )
@@ -121,6 +109,20 @@ function BottomNavigation(){
                                     headerStyle: {backgroundColor: colors.light.primary}
                                    })}
                                 />
+            <BottomTabs.Screen name='Settings' 
+                               component={SettingsScreen}
+                               options={({ })=>({
+                                
+                                tabBarIcon: ({focused, color})=>{
+                                    return(
+                                        focused ? <Feather name='settings' size={35} color={color}/> 
+                                                   :
+                                                   <Feather name='settings' size={30} color={color}/>
+                                    )
+                                },
+                                headerShown: false
+                               })}/>
+
             
         </BottomTabs.Navigator>
     )

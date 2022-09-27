@@ -13,7 +13,7 @@ export default function ChatScreen({route, navigation}) {
       headerTitle: ()=>{
         return (
           <View style={{flexDirection: 'row'}}>
-            <DisplayImage image={imgUrl}/>
+            <DisplayImage image={imgUrl} size={30}/>
             <Text style={{lineHeight: 20, fontSize: 16,   fontFamily: 'montserrat-light', }}>{name}</Text>
           </View>
         )
@@ -23,16 +23,7 @@ export default function ChatScreen({route, navigation}) {
 
   useEffect(() => {
     setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
+      
     ])
   }, [])
 

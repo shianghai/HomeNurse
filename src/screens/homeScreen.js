@@ -11,8 +11,13 @@ import colors from '../../constants/colors'
 
 function HomeScreen(){
     const [newsData, setNewsData] = useState();
+    const [news, setNews] = useState();
     let [loading, setLoading] = useState(true);
-    
+    const url = 'https://newsapi.org/v2/everything?' +
+          'q=Health&' +
+          'from=2022-09-26&' +
+          'sortBy=popularity&' +
+          'apiKey=cc456e085bb84f19b96f15468198a07e';
 
     useEffect(()=>{
         const getDb = async()=>{
@@ -20,6 +25,16 @@ function HomeScreen(){
             const newArr = [];
             const querySnapshot = await getDocs(collection(fireStoreDb, "news"));
             
+            const req = new Request(url);
+            fetch(req)
+            .then(response => response.json().
+                then((data) => {
+                    const newsData = data['articles']
+                    setNews(newsData);
+                    console.log("final data: " + JSON.stringify(data['articles'][0].source))
+                }))
+                
+           
             querySnapshot.forEach((doc) => {
                 newArr.push(doc.data())
                 // doc.data() is never undefined for query doc snapshots
@@ -28,10 +43,17 @@ function HomeScreen(){
             setNewsData(newArr);
             setTimeout(()=>{
                 setLoading(!loading)
-            }, 3000)
+            }, 1000)
             
         }
-       getDb();
+        getDb();
+
+       const getNews = async()=>{
+
+        
+       }
+       getNews();
+
        
     }, [])
 
@@ -43,7 +65,7 @@ function HomeScreen(){
     return(
         <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', }} >
             
-                <NewsCard Data = {newsData} />
+                <NewsCard Data = {news} />
            
            
         </SafeAreaView>

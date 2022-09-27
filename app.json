@@ -25,6 +25,12 @@
       "bundleIdentifier": "com.finalproject.homenurse",
       "config": {
         "googleMapsApiKey": "AIzaSyBJFzJvnE6GL2GGCGUplrTEZfUWthjnYKg"
+      },
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       }
     },
     "android": {

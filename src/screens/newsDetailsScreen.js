@@ -12,8 +12,8 @@ function NewsDetailsScreen({route, navigation}){
         navigation.goBack()
     }
 
-    const [data, setData] = useState();
-    const {title, writer, fullText, date} = route.params;
+    
+    const {title, author, content, publishedAt, url, urlToImage} = route.params;
     
 
     // useEffect(()=>{
@@ -42,20 +42,20 @@ function NewsDetailsScreen({route, navigation}){
                 <ScrollView contentContainerStyle={{alignContent: 'center', justifyContent: 'center', flexGrow: 1, alignItems: 'center', paddingHorizontal: '2%', marginBottom: '20%'}}   >
                         <View style={{width: "100%", height: "100%", }}>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <DisplayImage image={"https://picsum.photos/200/300"} size={70}/>
-                                <View>
-                                    <Text style={{ fontSize:20,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}>{writer}</Text>
-                                    <Text style={{ fontSize:16,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}> University of Ghana</Text>
+                                <DisplayImage image={"https://picsum.photos/id/237/200/105"} size={70}/>
+                                <View style={{justifyContent: 'center'}}>
+                                    <Text style={{ fontSize:20,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}>{author}</Text>
+                                    <Text style={{ fontSize:16,  marginVertical: '2%', fontFamily: 'montserrat-light', }}>{publishedAt}</Text>
                                     
                                 </View>
                                 
                             </View>
-                            <Text style={{ fontSize:20,  marginVertical: '2%', fontFamily: 'montserrat-light', }}>{date}</Text>
+                           
                             
                             <Text style={{lineHeight: 24, fontSize: 28, fontFamily: 'montserrat-medium', marginTop: '5%', paddingVertical: "2%", alignSelf: 'center'}}>{title}</Text>
-                            <Image source={require('../../assets/2.jpg')} style={{width: "99%", height: "10%"}} resizeMode="cover"/>
-                            <Text style={{lineHeight: 30, fontSize: 24,  marginTop: '4%', fontFamily: 'montserrat-light'}}>{fullText}</Text>                
-                            <Text style={{ fontSize:20,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}>{date}</Text>
+                            <Image source={{uri: urlToImage}} style={{width: "99%", height: "45%"}} resizeMode="cover"/>
+                            <Text style={{lineHeight: 30, fontSize: 24,  marginTop: '4%', fontFamily: 'montserrat-light'}}>{content}</Text>                
+                            <Text style={{ fontSize:20,  paddingBottom: "3%", fontFamily: 'montserrat-light', }}>{publishedAt}</Text>
                             
                     
                         </View>
