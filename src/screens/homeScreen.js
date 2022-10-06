@@ -13,6 +13,7 @@ function HomeScreen(){
     const [newsData, setNewsData] = useState();
     const [news, setNews] = useState();
     let [loading, setLoading] = useState(true);
+    
     const url = 'https://newsapi.org/v2/everything?' +
           'q=Health&' +
           'from=2022-09-26&' +

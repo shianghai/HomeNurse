@@ -1,5 +1,5 @@
-import { useState } from "react";
-import {Pressable, SafeAreaView, ScrollView, Text, View, ActivityIndicator} from 'react-native';
+import { useState } from 'react';
+import {Pressable, SafeAreaView, ScrollView, Text, View, ActivityIndicator, Image, KeyboardAvoidingView, Platform} from 'react-native';
 import InputField from "../components/input";
 import FlatButton from "../components/flatButton";
 import {useSelector, useDispatch} from 'react-redux'
@@ -9,6 +9,7 @@ import { signInUserWithEmailAndPassword } from "../firebase";
 import colors from "../../constants/colors";
 import {firebaseApp} from '../firebase'
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import TextButton from '../components/textButton'
 
 
 
@@ -16,16 +17,31 @@ function LoginScreen({navigation}){
     const editEnded = useSelector((state)=>state.emailEditEnded.editMode)
     const emailText = useSelector((state=>state.emailText.emailValue))
     const validatorFeedback = IValidator(emailText);
-
-    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMeassage, setErrorMessage] = useState("")
 
     function handleSignIn(){
         const auth = getAuth(firebaseApp);
-        signInWithEmailAndPassword(auth, "enochdaywalker@gmail.com", "password123").then(
-            (userCredential)=>{
-                if(userCredential != null) navigation.navigate('Root')
-            }
-        )
+        if(email === "" || password === ""){
+            setError(true);
+            setErrorMessage("please input all text fields");
+        }
+        else{
+            signInWithEmailAndPassword(auth, email, password).then(
+                (userCredential)=>{
+                    if(userCredential != null) navigation.navigate('Root')
+                }
+
+            )
+            .catch((error) => {
+                setError(true);
+                setErrorMessage("username and password do not match");
+              });
+        }
+        
         
     }
     function toogleIndicator(){
@@ -34,43 +50,50 @@ function LoginScreen({navigation}){
     
 
     return(
-        <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.light.input}} onLayout={()=>{toogleIndicator()}}>
+        <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === 'ios' ? "position" : "height"} contentContainerStyle={{flex: 1, }} keyboardVerticalOffset={-80}>
+        <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "#04293A"}} onLayout={()=>{toogleIndicator()}}>
             <ScrollView contentContainerStyle={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <View style={{justifyContent: 'center', alignItems: 'center', marginBottom: '5%'}}>
-                    <Text style={{fontSize: 40}}>Welcome Back</Text>
-                    <Text style={{fontSize: 20}}>Login</Text>
+                    <Image source={require('../../assets/cardiogram.png')} resizeMethod={"scale"} resizeMode={"cover"}/>
                 </View>
                 
                 <InputField 
-                    style={{height: '12%',}}
                     
-                    placeHolderText={'email'}
-                    inputType={'email'}/>
-                    {
-                        editEnded && <View>
-                               <ValidationComment type = 'email' validationFeedBack = {validatorFeedback}/>
-                        </View>
-                    }
+                    textStyle={{color: 'grey'}}
+                    placeHolderText={'Email'}
+                    inputType={'email'}
+                    style={{marginTop: '5%', borderRadius: 10}}
+                    onChangeText = {(text)=> setEmail(text) }
+                    />
+                   
                 <InputField 
-                    style={{height: '12%', marginTop: '5%'}}
+                    style={{marginTop: '5%', borderRadius: 10}}
+                   textStyle={{color: 'grey'}}
                     endIconName={'eye-off'}
-                    placeHolderText={'password'}
-                    secureTextEntry={true}/>
+                    placeHolderText={'Password'}
+                    secureTextEntry={true}
+                    onChangeText = {(text)=> setPassword(text) }/>
                 
-                <FlatButton text={'Login'} style={{marginTop: '10%', width: "99%", height: "9%",}} onPress={()=>handleSignIn()} />
-                
-                <Text style={{marginVertical: '2%', fontSize: 20}}>or</Text>
-                <FlatButton text={'  login with Google'} style={{ width: "99%", height: "9%", backgroundColor: '#c72218'}} textStyle={{fontSize: 15}} startIconName={'sc-google-plus'}/>
 
+                <Text style={{fontStyle: 'italic', justifyContent: 'flex-end', alignSelf: 'flex-end', color: "#FFFFFF", marginTop: "3%"}}>Forgot Password</Text>
+
+                    { error && <View style={{marginTop: '5%'}}>
+                        <Text style={{color: 'red'}}>{errorMeassage}</Text>
+                    </View>}
+                
+                <FlatButton text={'Sign In'} style={{marginTop: '5%',}} onPress={()=>handleSignIn()} />
+                
+                
+                
+                
                 <View style={{flexDirection: 'row', marginTop: '5%'}}>
-                    <Text style={{fontSize: 18}}>Don't have an account?</Text>
-                    <Pressable onPress={()=>navigation.navigate('SignUp')}>
-                        <Text style={{textDecorationLine: 'underline', fontSize: 18}}>  SignUp</Text>
-                    </Pressable>
+                    <Text style={{fontSize: 18, color: "#FFFFFF"}}>Don't have an account? </Text>
+                    <TextButton text={"Sign Up"} color={"#3063C5"} style={{textDecorationLine: 'underline'}}/>
                 </View>
             </ScrollView>
             
         </SafeAreaView>
+        </KeyboardAvoidingView>
     )
 }
 

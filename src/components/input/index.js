@@ -18,17 +18,17 @@ const defaultInputProps = {
     viewStyle: {
         width: "99%",
         height: "12%",
-        marginTop: "3%",
-        borderRadius: 8,
+        
+        
 
     },
     collorPallete: {
         borderActive: colors.light.secondaryTint,
-        borderInactive: 'grey',
+        borderInactive: '#3063C5',
         hasError: 'red',
-        content: 'grey',
-        backgroundInactive: '#E1EBEA',
-        backgroundActive: 'white'
+        
+        backgroundActive: '#f0faf3',
+        backgroundInactive: 'white'
     }
 }
 
@@ -55,7 +55,7 @@ function InputField({ ...props}){
     return(
         <View style={[ defaultInputProps.viewStyle, props.style,
                         {flexDirection: 'row',
-                        borderWidth: 0.5,
+                         borderBottomWidth: 1.5,
                         borderColor: active? defaultInputProps.collorPallete.borderActive : defaultInputProps.collorPallete.borderInactive,
                         backgroundColor: active? defaultInputProps.collorPallete.backgroundActive : defaultInputProps.collorPallete.backgroundInactive
                         }]}>
@@ -72,10 +72,10 @@ function InputField({ ...props}){
                 secureTextEntry={props.secureTextEntry}
                 placeholderTextColor={defaultInputProps.collorPallete.content}
                 editable={true}
-                style={{width: '90%', height: '90%', alignSelf: 'center', alignItems: 'center', justifyContent: 'center', fontSize: 18, alignContent:'center', textAlign: 'center', color: 'grey', }}
+                style={[props.textStyle, {width: '90%', height: '90%',  fontSize: 18,  textAlignVertical: "bottom"}, ]}
                 onFocus={()=>handleFocus()}
                 onBlur={()=>handleFocus()}
-                onChangeText = {(text)=>dispatch(setEmailText(text))}
+                onChangeText = {props.onChangeText}
                 onSubmitEditing={props.onSubmitEditing}
                 onEndEditing={handleEndEditting(props.inputType)}
                 />
@@ -84,7 +84,7 @@ function InputField({ ...props}){
                     props.endIconName && 
                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         // @ts-ignore
-                        <Feather name={props.endIconName} size={15} style={{alignSelf: 'center'}}/>
+                        <Feather name={props.endIconName} size={15} style={{alignSelf: 'center', color: '#50cfd4'}}/>
                     
                 }
         </View>

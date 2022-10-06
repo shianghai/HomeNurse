@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator();
 function MainStackNavigator(){
     return(
         <Stack.Navigator
-            initialRouteName='LogIn'>
+            initialRouteName='Login+'>
             <Stack.Screen name='Root' component={MainDrawerNavigator} options={{headerShown: false}}/>
             <Stack.Screen name ='EditProfile' component={EditProfileScreen} />
             <Stack.Screen name='DosageTracker' component={DosageTrackerScreen}/>

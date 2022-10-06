@@ -5,7 +5,7 @@ import {Ionicons, MaterialCommunityIcons, EvilIcons} from '@expo/vector-icons'
 
 function FlatButton({text, ...props}){
     return(
-        <View style={[{width: "95%", height: "12%%", backgroundColor: colors.dark.secondaryDark, }, props.style]}>
+        <View style={[{width: "40%", height: "7%%", backgroundColor: "#1185E0", borderRadius: 22 }, props.style]}>
                 <TouchableOpacity style={{ width: "100%", height: "100%", alignItems: 'center', justifyContent: "center", flexDirection: 'row', }} onPress={props.onPress}>
                     {
                         props.startIconName && <EvilIcons name={props.startIconName} size={30} color={'yellow'}/>

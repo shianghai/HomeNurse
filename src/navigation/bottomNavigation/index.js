@@ -1,7 +1,6 @@
 import {View, Text, Pressable, } from 'react-native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import HomeScreen from '../../screens/homeScreen'
-import DiagnosisScreen from '../../screens/diagnosisScreen'   
+import HomeScreen from '../../screens/homeScreen'   
 import MapScreen from '../../screens/mapScreen'
 import { Ionicons, Feather } from '@expo/vector-icons'
 import SearchBarr from '../../components/searchBarr'
@@ -106,7 +105,7 @@ function BottomNavigation(){
                                                        <Feather name='map-pin' size={30} color={color}/>
                                         )
                                     },
-                                    headerStyle: {backgroundColor: colors.light.primary}
+                                    headerShown: false
                                    })}
                                 />
             <BottomTabs.Screen name='Settings' 

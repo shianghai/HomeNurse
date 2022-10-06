@@ -14,6 +14,7 @@ export default function NewsCard({Data}){
     const sHeight = useWindowDimensions().height
     const sWidth = useWindowDimensions().width
 
+    console.log(Data);
     const [content, setContent]  = useState("")
     const [index, setIndex] = useState(0);
 
@@ -26,11 +27,17 @@ export default function NewsCard({Data}){
         })
     }
 
-    const getNewsContent = async()=>{
+    const getNewsContent = async({title})=>{
         try{
-            const index = getIndex();
-            const content = await fetch()
-            setContent(content)
+            
+            const index = getIndex(title);
+            const url = "https://homenurse-backend.herokuapp.com/news/" + index
+            const content = await fetch(url)
+                                  .then((response)=>{
+                                    console.log(response.blob)
+                                  })
+                                  
+            
             return content;
         }
         catch(error){
@@ -40,9 +47,10 @@ export default function NewsCard({Data}){
 
     function handlePress(title, author, content, publishedAt, url, urlToImage){
 
-        getIndex(title)
-         const fullNews = getNewsContent();
-        navigation.navigate('NewsDetails', {
+        
+            const fullNews = getNewsContent({title});
+            console.log(fullNews);
+            navigation.navigate('NewsDetails', {
             title: title,
             author: author,
             content: content,
@@ -73,7 +81,7 @@ export default function NewsCard({Data}){
                        
                        <Text style={{lineHeight: 24, fontSize: 24, padding: "3%", fontFamily: 'montserrat-medium'}}>{item.title}</Text>
                        <Text style={{lineHeight: 20, fontSize: 16,  padding: "3%", fontFamily: 'montserrat-light'}}>{item.description}</Text>
-                       <Text style={{fontSize: 15, padding:"3%", fontFamily: 'lato-regular'}}>{DateFormater(item.publishedAt)}</Text>
+                       <Text style={{fontSize: 15, padding:"3%", fontFamily: 'lato-regular'}}>{item.publishedAtr}</Text>
                       
                    </View>
                 </View>
