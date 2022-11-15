@@ -22,7 +22,6 @@ function HomeScreen(){
 
     useEffect(()=>{
         const getDb = async()=>{
-            signInUserWithEmailAndPassword("enochdaywalker@gmail.com", "password123");
             const newArr = [];
             const querySnapshot = await getDocs(collection(fireStoreDb, "news"));
             

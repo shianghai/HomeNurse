@@ -1,3 +1,2 @@
-input validation
-searchbar state update
-authentication state
+render different view for a professional and different for normal user in the chat screen
+if no chat has been made by normal user yet, show professionals list, show curent chats otherwise

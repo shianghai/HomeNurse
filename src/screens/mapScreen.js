@@ -4,6 +4,7 @@ import * as Location from 'expo-location'
 import {useState, useLayoutEffect, useCallback, useEffect} from 'react'
 import { getPlaceId, getPlaces } from '../api/geoapify'
 import { async } from '@firebase/util'
+import Header from '../components/header'
 
 
 
@@ -58,7 +59,7 @@ async function getPlaces(categories, place_id, apiKey){
                 })
                 resolve(places)
             }else{
-              reject("not able able to get hospitals for this place")
+              reject("not able to get hospitals for this place")
             }
         })
   })
@@ -96,11 +97,7 @@ const [region, setRegion] = useState({
     
 
  useEffect(() => {
-    (async () => {
-
-      
-          
-        
+    (async () => {  
       getLocation()
       .then((location)=>{
           getPlaceId(location.coords.latitude, location.coords.longitude, apiKey)
@@ -130,9 +127,10 @@ const [region, setRegion] = useState({
     if(isLoading) return <ActivityIndicator animating={isLoading} style={{flex: 1}} />
     return(
         <SafeAreaView style={{flex: 1, alignItems: 'center', justifyContent: 'center',}}>
+            <Header userName={"shanghai"} hasBack={true} />
             <MapView 
               style={{width: "100%", height: "100%"}}
-              mapType={"hybrid"}
+              mapType={"standard"}
               showsUserLocation={true}
               followUserLocation={true}
               zoomEnabled={true}

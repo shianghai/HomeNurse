@@ -4,7 +4,7 @@ const initialState = {
     status: false 
 }
 
-const userSlice = createSlice({
+const loginStatusSlice = createSlice({
     name:'loginStatus',
     initialState,
     reducers: {
@@ -16,5 +16,5 @@ const userSlice = createSlice({
     }
 })
 
-export const {changeLoginStatus} = userSlice.actions;
-export default  userSlice.reducer;
+export const {changeLoginStatus} = loginStatusSlice.actions;
+export default  loginStatusSlice.reducer;

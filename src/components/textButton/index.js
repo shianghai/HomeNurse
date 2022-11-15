@@ -8,7 +8,7 @@ function TextButton({text, color, ...props}){
         
                 <TouchableOpacity style={{  alignItems: 'center', justifyContent: "center", flexDirection: 'row', }} onPress={props.onPress}>
                     <View style={{}}>
-                        <Text style={[{fontSize: 18, color: color,}, props.style]}>{text}</Text>
+                        <Text style={[ props.style, { color: color,}, ]}>{text}</Text>
                     </View>
                 </TouchableOpacity>
         

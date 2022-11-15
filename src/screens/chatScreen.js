@@ -12,6 +12,8 @@ export default function ChatScreen({route, navigation}) {
  const {name, imgUrl} = route.params
   const auth = getAuth(firebaseApp);
 
+  
+
   useLayoutEffect(()=>{
     navigation.setOptions({
       headerTitle: ()=>{
@@ -24,7 +26,7 @@ export default function ChatScreen({route, navigation}) {
       }
     })
 
-    const q = query(collection(fireStoreDb, 'chats'), orderBy('createdAt', 'desc'));
+    const q = query(collection(fireStoreDb, `chats/${name}}`), orderBy('createdAt', 'desc'));
         const unsubscribe = onSnapshot(q, (snapshot) => setMessages(
             snapshot.docs.map(doc => ({
                 _id: doc.data()._id,
@@ -43,7 +45,7 @@ export default function ChatScreen({route, navigation}) {
 
   const onSend = useCallback((messages = []) => {
     const { _id, createdAt, text, user,} = messages[0]
-    addDoc(collection(fireStoreDb, `chats/${user}`), { _id, createdAt,  text, user });
+    addDoc(collection(fireStoreDb, `chats/${name}`), { _id, createdAt,  text, user });
 }, []);
 
 

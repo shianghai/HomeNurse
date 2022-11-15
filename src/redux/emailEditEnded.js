@@ -6,7 +6,7 @@ const initialState= {
 
 export const emailEditEndedSlice = createSlice({
     name: 'emailEditEnded',
-    initialState,
+    initialState: false,
     reducers: {
         turnOnEmailEditEnded: (state)=>{
             state.editMode = true

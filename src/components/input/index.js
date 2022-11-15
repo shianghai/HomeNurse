@@ -9,6 +9,8 @@ import { turnOnEmailEditEnded } from "../../redux/emailEditEnded";
 
 
 
+
+
 const defaultInputProps = {
     focused:  true,
     enabled: true,
@@ -49,13 +51,15 @@ function InputField({ ...props}){
     function handleEndEditting(inputType){
         if(inputType = 'email'){
             dispatch(turnOnEmailEditEnded)
+            console.log("email: ", emailText)
         }
     }
 
     return(
         <View style={[ defaultInputProps.viewStyle, props.style,
                         {flexDirection: 'row',
-                         borderBottomWidth: 1.5,
+                         
+                         borderWidth: 1,
                         borderColor: active? defaultInputProps.collorPallete.borderActive : defaultInputProps.collorPallete.borderInactive,
                         backgroundColor: active? defaultInputProps.collorPallete.backgroundActive : defaultInputProps.collorPallete.backgroundInactive
                         }]}>
@@ -72,12 +76,13 @@ function InputField({ ...props}){
                 secureTextEntry={props.secureTextEntry}
                 placeholderTextColor={defaultInputProps.collorPallete.content}
                 editable={true}
-                style={[props.textStyle, {width: '90%', height: '90%',  fontSize: 18,  textAlignVertical: "bottom"}, ]}
+                style={[props.textStyle, {width: '90%', height: '90%',  textAlignVertical: "bottom", alignSelf: 'center', justifyContent: 'center', alignItems: 'center'}, ]}
                 onFocus={()=>handleFocus()}
                 onBlur={()=>handleFocus()}
                 onChangeText = {props.onChangeText}
                 onSubmitEditing={props.onSubmitEditing}
                 onEndEditing={handleEndEditting(props.inputType)}
+                keyboardType={props.keyboardType}
                 />
 
                 {

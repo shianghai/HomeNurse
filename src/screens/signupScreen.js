@@ -29,6 +29,7 @@ function SignUpScreen({navigation}){
     const [isProfessional, setIsProfessional] = useState(false)
 
 //TODO: add spinning action to when account is being created
+//TODO: addd activityindicator on splash screen
 
     function handleSignUp(){
         const auth = getAuth(firebaseApp);
